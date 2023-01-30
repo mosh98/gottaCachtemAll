@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {AppRoutingModule} from "./app-routing.module";
+import {HttpClientModule} from "@angular/common/http";
 
 import { AppComponent } from './app.component';
 import { TrainerPagePage } from './pages/trainer-page/trainer-page.page';
@@ -9,16 +10,18 @@ import { CataloguePagePage } from './pages/catalogue-page/catalogue-page.page';
 
 @NgModule({
 
-  declarations: [
+  declarations: [ //Components
     AppComponent,
     TrainerPagePage,
     LoginPagePage,
     CataloguePagePage
   ],
 
-  imports: [
+  imports: [ // Modules/Packages
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
+
   ],
 
   providers: [],

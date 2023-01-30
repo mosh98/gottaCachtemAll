@@ -3,19 +3,24 @@ import {RouterModule, Routes} from "@angular/router";
 import {TrainerPagePage} from "./pages/trainer-page/trainer-page.page";
 import {LoginPagePage} from "./pages/login-page/login-page.page";
 import {CataloguePagePage} from "./pages/catalogue-page/catalogue-page.page";
+import {BrowserModule} from "@angular/platform-browser";
 
 //
 
 const routes: Routes = [
+
   {path: 'trainer-page',
     component:TrainerPagePage
-
   },
+
   {path: 'login-page',
     component:LoginPagePage
   },
+
   {path:'catalogue-page',
-  component:CataloguePagePage}]
+  component:CataloguePagePage}
+
+]
 
 @NgModule({
   imports: [
@@ -26,4 +31,5 @@ const routes: Routes = [
   ]
 
 })
+
 export class AppRoutingModule { }

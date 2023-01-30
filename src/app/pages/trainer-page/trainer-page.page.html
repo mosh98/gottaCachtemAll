@@ -1,1 +1,8 @@
-<p>trainer-page works!</p>
+<h1>Trainer Page</h1>
+
+<ul class="jasmine-bar" *ngIf="userData">
+  <li *ngFor="let user of userData">
+    {{ user.username }} - {{ user.pokemon }}
+  </li>
+</ul>
+
