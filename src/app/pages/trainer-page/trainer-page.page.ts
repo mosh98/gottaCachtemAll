@@ -19,6 +19,7 @@ export class TrainerPagePage implements OnInit{
 
     ngOnInit(){
     this.http.get('https://bling-bling.herokuapp.com/trainers').subscribe(data =>{
+      localStorage.getItem('pokemon-trainer')
       this.id = 1
       this.userData = data;
 
@@ -38,9 +39,13 @@ export class TrainerPagePage implements OnInit{
     //make the patch item in ye
     this.selectedItem = item;
 
-    console.log(this.selectedItem);
-    console.log(index);
-    this.TrainerServce.removePokemonFromTrainer(this.id, this.selectedItem)
+    //get the userData based upon item
+    const result = this.userData.find((x: { id: any; }) => x.id === this.id);
+    //change the data list in the result
+
+    result.pokemon.splice(index,1)
+
+    this.TrainerServce.removePokemonFromTrainer(this.id,result)
 
   }
 
