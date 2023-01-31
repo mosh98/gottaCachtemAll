@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpBackend, HttpClient} from "@angular/common/http";
+import {TrainerService} from "../../services/trainer.service";
+
 
 @Component({
   selector: 'app-trainer-page',
@@ -7,16 +9,39 @@ import {HttpBackend, HttpClient} from "@angular/common/http";
   styleUrls: ['./trainer-page.page.css']
 })
 export class TrainerPagePage implements OnInit{
-  userData: any;
+  userData: any; //entire data from the api
+  id: any; //this one needs to be populated using some shared context
+  userPokemon: any; //only the user owned pokimons
+  private selectedItem: any; //selected items to be removed.
 
-  constructor(private http:HttpClient) {
-  }
+  constructor(private http:HttpClient, private TrainerServce:TrainerService ) {}
+
 
     ngOnInit(){
     this.http.get('https://bling-bling.herokuapp.com/trainers').subscribe(data =>{
-      console.log(data)
-      this.userData =data
+      this.id = 1
+      this.userData = data;
+
+
+
+      if (this.userData) {
+        const result = this.userData.find((x: { id: any; }) => x.id === this.id);
+
+        if (result) {
+          this.userPokemon = result.pokemon
+        }
+      }
     });
     }
+
+  onSelect(item: any, index:number) {
+    //make the patch item in ye
+    this.selectedItem = item;
+
+    console.log(this.selectedItem);
+    console.log(index);
+    this.TrainerServce.removePokemonFromTrainer(this.id, this.selectedItem)
+
+  }
 
 }

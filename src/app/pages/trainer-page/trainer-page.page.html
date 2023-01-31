@@ -1,8 +1,16 @@
-<h1>Trainer Page</h1>
+<h1 *ngIf="userData"> {{userData.username}}'s Trainer Page </h1>
 
-<ul class="jasmine-bar" *ngIf="userData">
-  <li *ngFor="let user of userData">
-    {{ user.username }} - {{ user.pokemon }}
+
+
+<ul  *ngIf="userPokemon ">
+  <li *ngFor="let pokemon of userPokemon; let indexOfelement=index;" >
+     {{ pokemon }}
+
+    <button class="bg-black hover:bg-red-500  text-white font-bold py-2 px-4 rounded" (click) ="onSelect(pokemon, indexOfelement)" >
+      Remove
+    </button>
+
   </li>
 </ul>
+
 

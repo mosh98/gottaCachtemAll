@@ -15,7 +15,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
     TrainerPagePage,
     LoginPagePage,
     CataloguePagePage,
-    LoginFormComponent,
+    LoginFormComponent
   ],
 
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
