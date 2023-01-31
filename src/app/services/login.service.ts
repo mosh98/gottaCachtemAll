@@ -4,7 +4,8 @@ import { map, Observable, of, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Trainer } from '../models/trainer.model';
 
-const { apiTrainers, apiKey } = environment;
+const apiTrainers = environment.apiTrainers;
+const apiKey = environment.apiKey;
 
 @Injectable({
   providedIn: 'root',
