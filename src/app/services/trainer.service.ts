@@ -1,25 +1,26 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {environment} from "../../environments/environment";
-
-const { apiTrainers, apiKey } = environment;
+import { StorageKeys } from '../enums/storage-keys.enum';
+import { Trainer } from '../models/trainer.model';
+import { StorageUtil } from '../utils/storage.utils';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class TrainerService {
+  private _trainer?: Trainer;
 
-  constructor(private  http:HttpClient) { }
-
-  //make a patch request to remove a specific pokimon
-  public removePokemonFromTrainer(userId:number, pokemonId:number){
-    const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json', 'x-api-key': apiKey,})
-
-    };
-    let patchUrl = apiTrainers+`/${userId}`
-    return this.http.patch(patchUrl, {pokemon: pokemonId}, httpOptions)
+  get trainer(): Trainer | undefined {
+    return this._trainer;
   }
 
+  set trainer(trainer: Trainer | undefined) {
+    StorageUtil.storageSave<Trainer>(StorageKeys.PokemonTrainer, trainer!);
+    this._trainer = trainer;
+  }
+
+  constructor() {
+    this._trainer = StorageUtil.storageRead<Trainer>(
+      StorageKeys.PokemonTrainer
+    );
+  }
 }
