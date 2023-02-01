@@ -1,0 +1,23 @@
+:root {
+  --gradient-color-start: #5a67d8;
+  --gradient-color-end: #4c6ef5;
+  --animation-duration: 10s;
+}
+
+.bg-gradient {
+  background: linear-gradient(to right, var(--gradient-color-start), var(--gradient-color-end));
+  background-size: 200% auto;
+  animation: gradient-animation var(--animation-duration) linear infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

@@ -1,14 +1,21 @@
-<form #loginForm="ngForm" (ngSubmit)="loginSubmit(loginForm)">
-  <fieldset>
-    <label for="username" class="block">Trainer name</label>
-    <input
-      ngModel
-      #username="ngModel"
-      type="text"
-      name="username"
-      id="username"
-      placeholder="Ash"
-    />
+<div class="relative bg-indigo-500 h-64 w-full">
+  <div class="absolute top-0 bottom-0 left-0 right-0 bg-indigo-600 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
+<form #loginForm="ngForm" (ngSubmit)="loginSubmit(loginForm)" class="z-10 absolute top-0 bottom-0 left-0 right-0 p-10">
+  <fieldset class="w-1/2 mx-auto border p-4 mb-4">
+    <legend class="text-lg font-bold mb-3 text-white">Login</legend>
+    <div class="mb-4">
+      <label for="username" class="block font-medium mb-2 text-white">Trainer name</label>
+      <input
+        ngModel
+        #username="ngModel"
+        type="text"
+        name="username"
+        id="username"
+        class="w-full border py-2 px-3 rounded"
+        placeholder="Ash"
+      />
+    </div>
+    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Login</button>
   </fieldset>
-  <button type="submit">Login</button>
 </form>
+</div>
