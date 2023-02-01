@@ -9,7 +9,6 @@ import { TrainerPagePage } from './pages/trainer-page/trainer-page.page';
 import { LoginPagePage } from './pages/login-page/login-page.page';
 import { CataloguePagePage } from './pages/catalogue-page/catalogue-page.page';
 import { LoginFormComponent } from './components/login-form/login-form.component';
-import { CatalogueExampleComponent } from './components/catalogue-example/catalogue-example.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +17,6 @@ import { CatalogueExampleComponent } from './components/catalogue-example/catalo
     LoginPagePage,
     CataloguePagePage,
     LoginFormComponent,
-    CatalogueExampleComponent,
   ],
 
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
