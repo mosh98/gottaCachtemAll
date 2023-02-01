@@ -1,1 +1,16 @@
-<p>trainer-page works!</p>
+<h1 *ngIf="userData" class="font-bold text-3xl text-blue-600"> {{userData.username}}'s Trainer Page </h1>
+
+
+
+<ul  *ngIf="userPokemon ">
+  <li *ngFor="let pokemon of userPokemon; let indexOfelement=index;" >
+     {{ pokemon }}
+
+    <button class="bg-black hover:bg-red-500  text-white font-bold py-2 px-4 rounded" (click) ="onSelect(pokemon, indexOfelement)" >
+      Remove
+    </button>
+
+  </li>
+</ul>
+
+
