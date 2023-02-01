@@ -7,6 +7,11 @@ import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'catalogue-page',
+  },
+  {
     path: 'trainer-page',
     component: TrainerPagePage,
     canActivate: [AuthGuard],
