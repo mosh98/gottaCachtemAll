@@ -11,23 +11,19 @@ import { StorageUtil } from 'src/app/utils/storage.utils';
   templateUrl: './catalogue-page.page.html',
   styleUrls: ['./catalogue-page.page.css'],
 })
-export class CataloguePagePage implements OnInit {
-  constructor(private readonly pokemonService: PokemonService) {}
-
-  currentTrainer: Trainer = StorageUtil.storageRead(
-    StorageKeys.PokemonTrainer
-  )!;
-
-  ngOnInit(): void {
-    console.log(this.currentTrainer);
-    this.pokemonService.getPokemonList();
-  }
-
-  get pokemonList$(): Observable<Pokemon[]> {
-    return this.pokemonService.pokemonList$;
-  }
-
-  get pokemon$(): Observable<Pokemon> {
-    return this.pokemonService.pokemon$;
-  }
+export class CataloguePagePage {
+  // constructor(private readonly pokemonService: PokemonService) {}
+  // currentTrainer: Trainer = StorageUtil.storageRead(
+  //   StorageKeys.PokemonTrainer
+  // )!;
+  // ngOnInit(): void {
+  //   console.log(this.currentTrainer);
+  //   this.pokemonService.getPokemonList();
+  // }
+  // get pokemonList$(): Observable<Pokemon[]> {
+  //   return this.pokemonService.pokemonList$;
+  // }
+  // get pokemon$(): Observable<Pokemon> {
+  //   return this.pokemonService.pokemon$;
+  // }
 }

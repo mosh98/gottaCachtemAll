@@ -9,6 +9,7 @@ import { TrainerPagePage } from './pages/trainer-page/trainer-page.page';
 import { LoginPagePage } from './pages/login-page/login-page.page';
 import { CataloguePagePage } from './pages/catalogue-page/catalogue-page.page';
 import { LoginFormComponent } from './components/login-form/login-form.component';
+import { CatalogueListComponent } from './components/catalogue-list/catalogue-list.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
     LoginPagePage,
     CataloguePagePage,
     LoginFormComponent,
+    CatalogueListComponent,
   ],
 
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
