@@ -1,6 +1,17 @@
-<div *ngFor="let pokemon of pokemonList$ | async">
-  <div>
-    <h1>{{ pokemon.name }}</h1>
-    <img [src]="" />
+<div class="flex flex-wrap w-1/3 mx-auto">
+  <div
+    *ngFor="let pokemon of pokemonList$ | async"
+    class="w-40 bg-slate-300 flex my-2 mx-4"
+  >
+    <div class="mx-auto text-center">
+      <h1>{{ pokemon.name }}</h1>
+      <img [src]="generatePokemonImg(pokemon.url)" class="h-20" />
+      <button
+        class="py-1 px-2 bg-white rounded my-2"
+        (click)="addToCollection(pokemon)"
+      >
+        Catch
+      </button>
+    </div>
   </div>
 </div>
