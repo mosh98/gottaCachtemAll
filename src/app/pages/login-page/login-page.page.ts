@@ -10,6 +10,6 @@ export class LoginPagePage {
   constructor(private readonly router: Router) {}
 
   handleLogin(): void {
-    this.router.navigateByUrl('trainer-page');
+    this.router.navigateByUrl('catalogue-page');
   }
 }
