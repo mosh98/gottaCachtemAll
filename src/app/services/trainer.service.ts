@@ -65,6 +65,7 @@ export class TrainerService {
     this.http.patch<Trainer>(patchUrl, body_, httpOptions).subscribe((val) => {
       console.log("PATCH call successful ADD POKIMON", val);
     })
+    StorageUtil.storageSave(StorageKeys.PokemonTrainer, body_)
 
     return this.http.patch<Trainer>(patchUrl, body_, httpOptions);
   }
