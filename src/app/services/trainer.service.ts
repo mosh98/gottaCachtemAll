@@ -28,6 +28,8 @@ export class TrainerService {
   }
 
   public removePokemonFromTrainer(userId:number, body_:any): Observable<Trainer>{
+    /**
+     * */
     console.log("Trainer service called") //remove this
 
     let apiKey= 'abcdefg' //TODO:FIX THIS
@@ -49,6 +51,7 @@ export class TrainerService {
   public addPokemonToTrainer(userId:number, body_:any): Observable<Trainer> {
     /**
      * NOTE: NOT USED ANYWHERE YET
+     *
      * */
 
     //userId = 3

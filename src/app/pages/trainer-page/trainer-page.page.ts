@@ -16,7 +16,6 @@ export class TrainerPagePage implements OnInit{
   id: any; //this one needs to be populated using some shared context
   userPokemon: any; //only the user owned pokimons
   username: any; //username of the user
-  private selectedItem: any; //selected items to be removed.
 
   pokemon:any;
 
@@ -35,29 +34,32 @@ export class TrainerPagePage implements OnInit{
 
       if (this.userData) { //vet att det här är dumt, men det funkar!
 
-        console.log(this.userData)
         const result = this.userData.find((x: { id: any; }) => x.id === this.id);
 
         if (result) {
           this.userPokemon = result.pokemon
+
         }
       }
     });
 
-      this.TrainerServce.hardCode(2,null)
     }
 
-    getPokimonImage(namn:string){
-    //get image id
-      const data = null
-      let id = 3
+    getPokemonImage(url:string){
+
+      //you need be a crackhead to understand this
+      const id = url.trim().split("/").filter(e => String(e).trim()).pop();
 
       return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
     }
 
   onSelect(item: any, index:number) {
+    /**
+    * 1. selectedItem är indexet till pokimon i listan av trainer
+     * 2.
+     * **/
+
     //make the patch item in ye
-    this.selectedItem = item;
 
     //get the userData based upon item
     const result = this.userData.find((x: { id: any; }) => x.id === this.id);
@@ -67,6 +69,7 @@ export class TrainerPagePage implements OnInit{
 
     this.TrainerServce.removePokemonFromTrainer(this.id,result)
     StorageUtil.storageSave(StorageKeys.PokemonTrainer, result)
+
   }
 
 }
