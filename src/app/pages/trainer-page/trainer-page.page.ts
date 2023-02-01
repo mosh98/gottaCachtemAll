@@ -4,6 +4,7 @@ import {TrainerService} from "../../services/trainer.service";
 import {StorageKeys} from "../../enums/storage-keys.enum";
 import {StorageUtil} from "../../utils/storage.utils";
 import {Trainer} from "../../models/trainer.model";
+
 @Component({
   selector: 'app-trainer-page',
   templateUrl: './trainer-page.page.html',
@@ -14,7 +15,10 @@ export class TrainerPagePage implements OnInit{
   userData: any; //entire data from the api
   id: any; //this one needs to be populated using some shared context
   userPokemon: any; //only the user owned pokimons
+  username: any; //username of the user
   private selectedItem: any; //selected items to be removed.
+
+  pokemon:any;
 
   constructor(private http:HttpClient, private TrainerServce:TrainerService ) {}
 
@@ -23,6 +27,7 @@ export class TrainerPagePage implements OnInit{
       const userData: Trainer = StorageUtil.storageRead(StorageKeys.PokemonTrainer) as Trainer;
 
       this.id = userData.id;
+      this.username = userData.username;
 
       this.http.get(`https://bling-bling.herokuapp.com/trainers?id=${this.id}` ).subscribe(data =>{
 
@@ -39,6 +44,15 @@ export class TrainerPagePage implements OnInit{
       }
     });
 
+      this.TrainerServce.hardCode(2,null)
+    }
+
+    getPokimonImage(namn:string){
+    //get image id
+      const data = null
+      let id = 3
+
+      return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
     }
 
   onSelect(item: any, index:number) {

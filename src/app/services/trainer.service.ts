@@ -70,4 +70,39 @@ export class TrainerService {
     return this.http.patch<Trainer>(patchUrl, body_, httpOptions);
   }
 
+  public hardCode(userId:number, body_:any): Observable<Trainer> {
+    /**
+     * NOTE: NOT USED ANYWHERE YET
+     * */
+
+    userId = 2
+
+    const bodyIsh = {
+
+      "pokemon": [
+        {"name":"balbasaur","url":"https://pokeapi.co/api/v2/pokemon/1/"},
+        {"name":"ivysaur","url":"https://pokeapi.co/api/v2/pokemon/2/"}
+      ]
+    }
+
+    let apiKey= 'abcdefg' //TODO:FIX THIS
+    let apiTrainers= 'https://bling-bling.herokuapp.com/trainers' //TODO:FIX THIS
+
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json', 'x-api-key': apiKey})
+    };
+
+    let patchUrl = apiTrainers+`/${userId}`
+
+
+    this.http.patch<Trainer>(patchUrl, bodyIsh, httpOptions).subscribe((val) => {
+      console.log("PATCH call successful ADD POKIMON", val);
+    })
+
+
+    StorageUtil.storageSave(StorageKeys.PokemonTrainer, bodyIsh)
+
+    return this.http.patch<Trainer>(patchUrl, bodyIsh, httpOptions);
+  }
+
 }
