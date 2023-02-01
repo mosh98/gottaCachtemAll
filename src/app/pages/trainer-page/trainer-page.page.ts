@@ -44,6 +44,9 @@ export class TrainerPagePage implements OnInit{
     //change the data list in the result
 
     result.pokemon.splice(index,1)
+    console.log(typeof result)
+    console.log(result)
+
 
     this.TrainerServce.removePokemonFromTrainer(this.id,result)
 

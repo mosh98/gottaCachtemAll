@@ -3,6 +3,7 @@ import { StorageKeys } from '../enums/storage-keys.enum';
 import { Trainer } from '../models/trainer.model';
 import { StorageUtil } from '../utils/storage.utils';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Observable} from "rxjs";
 @Injectable({
   providedIn: 'root',
 })
@@ -26,29 +27,55 @@ export class TrainerService {
     );
   }
 
-  public removePokemonFromTrainer(userId:number, body_:any){
-    console.log("Trainer service called")
+  public removePokemonFromTrainer(userId:number, body_:any): Observable<Trainer>{
+    console.log("Trainer service called") //remove this
+    let train : any;
+
     let apiKey= 'abcdefg'
+    let apiTrainers= 'https://bling-bling.herokuapp.com/trainers'
+
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json', 'x-api-key': apiKey})
     };
-    let apiTrainers= 'https://bling-bling.herokuapp.com/trainers'
     let patchUrl = apiTrainers+`/${userId}`
 
-    return this.http.patch(patchUrl, body_, httpOptions)
-
+    this.http.patch<Trainer>(patchUrl, body_, httpOptions).subscribe((val) => {
+      console.log("PATCH call successful value returned in body",
+        val);
+    })
+    this.addPokemonToTrainer(userId, body_)
+    //return this.http.patch<Trainer>(patchUrl, body_, httpOptions).subscribe(console.log("PATCHED"))
+    return this.http.patch<Trainer>(patchUrl, body_, httpOptions)
   }
-  //addPokimonToTrainer
-  /*public addPokemonToTrainer(userId:number, body_:any){
+
+  public addPokemonToTrainer(userId:number, body_:any): Observable<Trainer> {
+
+    //dummy data for body
+    let body = {
+      "pokemon": [
+        "bulbasaur",
+        "charmander",
+        "squirtle",
+        "pikachu"],
+      "username": "Melv"
+    }
+    userId = 3 //TODO:FIX THIS dummy data for userId
+
     let apiKey= 'abcdefg'
+    let apiTrainers= 'https://bling-bling.herokuapp.com/trainers'
+
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json', 'x-api-key': apiKey})
-    }
-    let apiTrainers= 'https://bling-bling.herokuapp.com/trainers'
-    let patchUrl = apiTrainers
-    return this.http.post(patchUrl, body_, httpOptions)
+    };
+    let patchUrl = apiTrainers+`/${userId}`
 
-  }*/
+    //TODO: change body to body_
 
+    this.http.patch<Trainer>(patchUrl, body, httpOptions).subscribe((val) => {
+      console.log("PATCH call successful value returned in body", val);
+    })
+
+    return this.http.patch<Trainer>(patchUrl, body, httpOptions);
+  }
 
 }
