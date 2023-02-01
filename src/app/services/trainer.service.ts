@@ -44,10 +44,8 @@ export class TrainerService {
 
   public addPokemonToTrainer(
     userId: number,
-    body_: Pokemon[]
+    body_: Trainer
   ): Observable<Trainer> {
-    console.log(userId + ' has catched ' + body_);
-
     let apiKey = 'abcdefg'; //TODO:FIX THIS
     let apiTrainers = 'https://bling-bling.herokuapp.com/trainers'; //TODO:FIX THIS
 

@@ -18,10 +18,6 @@ export class CatalogueListComponent implements OnInit {
     private readonly trainerService: TrainerService
   ) {}
 
-  get trainer(): Trainer | undefined {
-    return this.trainerService.trainer;
-  }
-
   ngOnInit(): void {
     this.pokemonService.getPokemonList();
   }
@@ -37,13 +33,14 @@ export class CatalogueListComponent implements OnInit {
   }
 
   addToCollection(pokemon: Pokemon): void {
-    if (!this.trainer) return;
-    console.log(this.trainer.pokemon);
-    // console.log(this.currentTrainer.pokemon as unknown as Pokemon[]);
-    // this.trainerService.addPokemonToTrainer(this.currentTrainer.id, [
-    //   ...currentList,
-    //   pokemon,
-    // ]);
+    let trainer: Trainer = StorageUtil.storageRead(StorageKeys.PokemonTrainer)!;
+    console.log(trainer.pokemon);
+
+    let tempList = [...trainer.pokemon, pokemon];
+    this.trainerService.addPokemonToTrainer(trainer.id, {
+      ...trainer,
+      pokemon: tempList,
+    });
   }
 
   get pokemonList$(): Observable<Pokemon[]> {
