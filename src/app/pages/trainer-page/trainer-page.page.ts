@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpBackend, HttpClient} from "@angular/common/http";
 import {TrainerService} from "../../services/trainer.service";
-
+import {Trainer} from "../../models/trainer.model";
 
 @Component({
   selector: 'app-trainer-page',
@@ -18,12 +18,12 @@ export class TrainerPagePage implements OnInit{
 
 
     ngOnInit(){
-    this.http.get('https://bling-bling.herokuapp.com/trainers').subscribe(data =>{
-      localStorage.getItem('pokemon-trainer')
-      this.id = 1
+    let someData = JSON.parse(localStorage.getItem('pokemon-trainer')!)
+      this.id = someData.id;
+
+      this.http.get(`https://bling-bling.herokuapp.com/trainers?id=${this.id}` ).subscribe(data =>{
+
       this.userData = data;
-
-
 
       if (this.userData) {
         const result = this.userData.find((x: { id: any; }) => x.id === this.id);
@@ -33,6 +33,7 @@ export class TrainerPagePage implements OnInit{
         }
       }
     });
+
     }
 
   onSelect(item: any, index:number) {
@@ -47,9 +48,7 @@ export class TrainerPagePage implements OnInit{
     console.log(typeof result)
     console.log(result)
 
-
     this.TrainerServce.removePokemonFromTrainer(this.id,result)
-
   }
 
 }

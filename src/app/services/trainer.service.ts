@@ -49,6 +49,7 @@ export class TrainerService {
   }
 
   public addPokemonToTrainer(userId:number, body_:any): Observable<Trainer> {
+    let someData = JSON.parse(localStorage.getItem('pokemon-trainer')!)
 
     //dummy data for body
     let body = {
