@@ -32,8 +32,13 @@ export class CatalogueListComponent implements OnInit {
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`;
   }
 
+  hasCaught(pokemon: Pokemon): boolean {
+    return this.trainerService.hasCaught(pokemon);
+  }
+
   addToCollection(pokemon: Pokemon): void {
-    if (this.trainerService.hasCaught(pokemon))
+    if (this.hasCaught(pokemon))
+      // Fix proper error
       return console.log('Already caught!');
     console.log(pokemon);
     let trainer: Trainer = StorageUtil.storageRead(StorageKeys.PokemonTrainer)!;
