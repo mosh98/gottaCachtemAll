@@ -37,8 +37,10 @@ export class CatalogueListComponent implements OnInit {
   }
 
   addToCollection(pokemon: Pokemon): void {
+    alert("Pokemon Abducted!")
     if (this.hasCaught(pokemon))
       // Fix proper error
+      alert("Already Caught!")
       return console.log('Already caught!');
     console.log(pokemon);
     let trainer: Trainer = StorageUtil.storageRead(StorageKeys.PokemonTrainer)!;
@@ -49,9 +51,31 @@ export class CatalogueListComponent implements OnInit {
       ...trainer,
       pokemon: tempList,
     });
+    alert("Pokemon Abducted!")
   }
 
   get pokemonList$(): Observable<Pokemon[]> {
     return this.pokemonService.pokemonList$;
+  }
+
+  showInfo(pokemon:Pokemon): any {
+    //get the id
+    const url = pokemon.url
+    const id = url
+      .trim()
+      .split('/')
+      .filter((e) => String(e).trim())
+      .pop(); //get id
+
+    let det = null
+    this.pokemonService.getPokemonStats(id).subscribe((data: any) => {
+      console.log(data);
+      det = data;
+      let msg = `HP : ${det.stats[0].base_stat} \n Attack : ${det.stats[1].base_stat} \n Defense : ${det.stats[2].base_stat} \n Speed : ${det.stats[5].base_stat} \n Special Attack : ${det.stats[3].base_stat} \n Special Defense : ${det.stats[4].base_stat} \n`
+      alert(msg)
+
+
+    });
+
   }
 }
