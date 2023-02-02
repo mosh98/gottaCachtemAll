@@ -13,8 +13,6 @@ import { StorageUtil } from 'src/app/utils/storage.utils';
   styleUrls: ['./catalogue-list.component.css'],
 })
 export class CatalogueListComponent implements OnInit {
-  showPopUpCard = false;
-
   constructor(
     private readonly pokemonService: PokemonService,
     private readonly trainerService: TrainerService
@@ -34,9 +32,13 @@ export class CatalogueListComponent implements OnInit {
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`;
   }
 
-  addToCollection(pokemon: Pokemon): void {
+  hasCaught(pokemon: Pokemon): boolean {
+    return this.trainerService.hasCaught(pokemon);
+  }
 
-    if (this.trainerService.hasCaught(pokemon))
+  addToCollection(pokemon: Pokemon): void {
+    if (this.hasCaught(pokemon))
+      // Fix proper error
       return console.log('Already caught!');
     console.log(pokemon);
     let trainer: Trainer = StorageUtil.storageRead(StorageKeys.PokemonTrainer)!;

@@ -10,7 +10,8 @@ import { LoginPagePage } from './pages/login-page/login-page.page';
 import { CataloguePagePage } from './pages/catalogue-page/catalogue-page.page';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { CatalogueListComponent } from './components/catalogue-list/catalogue-list.component';
-
+import { CatalogueHeroComponent } from './components/catalogue-hero/catalogue-hero.component';
+import { TrainerHeroComponent } from './components/trainer-hero/trainer-hero.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CatalogueListComponent } from './components/catalogue-list/catalogue-li
     CataloguePagePage,
     LoginFormComponent,
     CatalogueListComponent,
-
+    CatalogueHeroComponent,
+    TrainerHeroComponent,
   ],
 
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
