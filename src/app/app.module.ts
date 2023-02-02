@@ -11,6 +11,7 @@ import { CataloguePagePage } from './pages/catalogue-page/catalogue-page.page';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { CatalogueListComponent } from './components/catalogue-list/catalogue-list.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,6 +20,7 @@ import { CatalogueListComponent } from './components/catalogue-list/catalogue-li
     CataloguePagePage,
     LoginFormComponent,
     CatalogueListComponent,
+
   ],
 
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],

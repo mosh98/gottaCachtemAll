@@ -56,7 +56,7 @@ export class PokemonService {
       });
   }
 
-  getPokemonStats(id: number): void {
+  getPokemonStats(id: any): any {
     this.http
       .get<any>(`${apiUrl}/${id}`)
       .pipe(
@@ -75,5 +75,6 @@ export class PokemonService {
           // Handle error msg
         },
       });
+    return this._pokemon$.asObservable();
   }
 }

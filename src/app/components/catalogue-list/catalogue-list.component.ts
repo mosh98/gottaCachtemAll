@@ -35,6 +35,7 @@ export class CatalogueListComponent implements OnInit {
   }
 
   addToCollection(pokemon: Pokemon): void {
+
     if (this.trainerService.hasCaught(pokemon))
       return console.log('Already caught!');
     console.log(pokemon);
@@ -46,6 +47,7 @@ export class CatalogueListComponent implements OnInit {
       ...trainer,
       pokemon: tempList,
     });
+    alert("Pokemon Abducted!")
   }
 
   get pokemonList$(): Observable<Pokemon[]> {
@@ -60,11 +62,16 @@ export class CatalogueListComponent implements OnInit {
       .split('/')
       .filter((e) => String(e).trim())
       .pop(); //get id
-    //get pokimon stats
-    this.showPopUpCard = true;
-    //const item = PokemonService.getPokemonStats()
+
+    let det = null
+    this.pokemonService.getPokemonStats(id).subscribe((data: any) => {
+      console.log(data);
+      det = data;
+      let msg = `HP : ${det.stats[0].base_stat} \n Attack : ${det.stats[1].base_stat} \n Defense : ${det.stats[2].base_stat} \n Speed : ${det.stats[5].base_stat} \n Special Attack : ${det.stats[3].base_stat} \n Special Defense : ${det.stats[4].base_stat} \n`
+      alert(msg)
 
 
+    });
 
   }
 }
