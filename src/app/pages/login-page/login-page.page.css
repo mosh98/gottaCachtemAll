@@ -10,6 +10,12 @@
   animation: gradient-animation var(--animation-duration) linear infinite;
 }
 
+.gradient-background {
+  background: linear-gradient(265deg,#5b553d,#d02d11,#71a2b7,#54e0d3,#69ef7e);
+  background-size: 300% 300%;
+  animation: gradient-animation 30s ease infinite;
+}
+
 @keyframes gradient-animation {
   0% {
     background-position: 0% 50%;
@@ -21,3 +27,15 @@
     background-position: 0% 50%;
   }
 }
+img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin: 0 auto;
+}
+.center {
+  display: block;
+  margin: 0 auto;
+}
+
+
