@@ -37,8 +37,10 @@ export class CatalogueListComponent implements OnInit {
   }
 
   addToCollection(pokemon: Pokemon): void {
+
     if (this.hasCaught(pokemon))
       return alert(`Already Caught ${pokemon.name}!`);
+
     console.log(pokemon);
     let trainer: Trainer = StorageUtil.storageRead(StorageKeys.PokemonTrainer)!;
     console.log(trainer.pokemon);
