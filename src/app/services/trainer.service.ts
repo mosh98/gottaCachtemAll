@@ -11,6 +11,8 @@ import { environment } from 'src/environments/environment';
 })
 export class TrainerService {
   private _trainer?: Trainer;
+  private apiKey = environment.apiKey;
+  private apiTrainers = environment.apiTrainers;
 
   get trainer(): Trainer | undefined {
     return this._trainer;
@@ -47,21 +49,19 @@ export class TrainerService {
     userId: number,
     body_: Trainer
   ): Observable<Trainer> {
-    let apiKey = environment.apiKey;
-    let apiTrainers = environment.apiTrainers
-
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'x-api-key': apiKey,
+        'x-api-key': this.apiKey,
       }),
     };
-    let patchUrl = apiTrainers + `/${userId}`;
+    let patchUrl = this.apiTrainers + `/${userId}`;
 
     this.http.patch<Trainer>(patchUrl, body_, httpOptions).subscribe((val) => {
       console.log('PATCH call successful ADD POKIMON', val);
     });
     StorageUtil.storageSave(StorageKeys.PokemonTrainer, body_);
+    this._trainer = body_;
 
     return this.http.patch<Trainer>(patchUrl, body_, httpOptions);
   }
@@ -72,16 +72,13 @@ export class TrainerService {
   ): Observable<Trainer> {
     console.log('Trainer service called'); //remove this
 
-    let apiKey = environment.apiKey;
-    let apiTrainers = environment.apiTrainers
-
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'x-api-key': apiKey,
+        'x-api-key': this.apiKey,
       }),
     };
-    let patchUrl = apiTrainers + `/${userId}`;
+    let patchUrl = this.apiTrainers + `/${userId}`;
 
     this.http.patch<Trainer>(patchUrl, body_, httpOptions).subscribe((val) => {
       console.log('PATCH call successful REMOVE POKIMON', val);
