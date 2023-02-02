@@ -4,6 +4,7 @@ import {TrainerService} from "../../services/trainer.service";
 import {StorageKeys} from "../../enums/storage-keys.enum";
 import {StorageUtil} from "../../utils/storage.utils";
 import {Trainer} from "../../models/trainer.model";
+
 @Component({
   selector: 'app-trainer-page',
   templateUrl: './trainer-page.page.html',
@@ -14,7 +15,9 @@ export class TrainerPagePage implements OnInit{
   userData: any; //entire data from the api
   id: any; //this one needs to be populated using some shared context
   userPokemon: any; //only the user owned pokimons
-  private selectedItem: any; //selected items to be removed.
+  username: any; //username of the user
+
+  pokemon:any;
 
   constructor(private http:HttpClient, private TrainerServce:TrainerService ) {}
 
@@ -23,6 +26,7 @@ export class TrainerPagePage implements OnInit{
       const userData: Trainer = StorageUtil.storageRead(StorageKeys.PokemonTrainer) as Trainer;
 
       this.id = userData.id;
+      this.username = userData.username;
 
       this.http.get(`https://bling-bling.herokuapp.com/trainers?id=${this.id}` ).subscribe(data =>{
 
@@ -30,20 +34,32 @@ export class TrainerPagePage implements OnInit{
 
       if (this.userData) { //vet att det här är dumt, men det funkar!
 
-        console.log(this.userData)
         const result = this.userData.find((x: { id: any; }) => x.id === this.id);
 
         if (result) {
           this.userPokemon = result.pokemon
+
         }
       }
     });
 
     }
 
+    getPokemonImage(url:string){
+
+      //you need be a crackhead to understand this
+      const id = url.trim().split("/").filter(e => String(e).trim()).pop();
+
+      return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+    }
+
   onSelect(item: any, index:number) {
+    /**
+    * 1. selectedItem är indexet till pokimon i listan av trainer
+     * 2.
+     * **/
+
     //make the patch item in ye
-    this.selectedItem = item;
 
     //get the userData based upon item
     const result = this.userData.find((x: { id: any; }) => x.id === this.id);
@@ -53,6 +69,7 @@ export class TrainerPagePage implements OnInit{
 
     this.TrainerServce.removePokemonFromTrainer(this.id,result)
     StorageUtil.storageSave(StorageKeys.PokemonTrainer, result)
+
   }
 
 }
