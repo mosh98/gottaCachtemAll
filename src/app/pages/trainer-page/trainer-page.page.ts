@@ -50,7 +50,7 @@ export class TrainerPagePage implements OnInit{
       //you need be a crackhead to understand this
       const id = url.trim().split("/").filter(e => String(e).trim()).pop();
 
-      return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+      return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`
     }
 
   onSelect(item: any, index:number) {

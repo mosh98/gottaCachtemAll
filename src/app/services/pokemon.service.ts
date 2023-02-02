@@ -6,8 +6,9 @@ import { PokemonListResponse } from '../models/pokemon-list-response.model';
 import { PokemonResponse } from '../models/pokemon-response.model';
 import { StorageUtil } from '../utils/storage.utils';
 import { StorageKeys } from '../enums/storage-keys.enum';
+import { environment } from 'src/environments/environment';
 
-const apiUrl: string = `https://pokeapi.co/api/v2/pokemon`;
+const apiUrl: string = environment.apiUrl
 
 @Injectable({
   providedIn: 'root',
@@ -40,6 +41,7 @@ export class PokemonService {
       .get<PokemonListResponse>(apiUrl)
       .pipe(
         map((res: PokemonListResponse) => {
+
           return res.results;
         })
       )
@@ -54,17 +56,20 @@ export class PokemonService {
       });
   }
 
-  getPokemon(id: number): void {
+  getPokemonStats(id: number): void {
     this.http
-      .get<PokemonResponse>(`${apiUrl}/${id}`)
+      .get<any>(`${apiUrl}/${id}`)
       .pipe(
+
         map((res: PokemonResponse) => {
-          return { name: res.name, url: `${apiUrl}/${res.id}` };
+
+          return { name: res.name, url: `${apiUrl}/${res.id}`, stats:res.stats}
         })
       )
       .subscribe({
         next: (pokemon: Pokemon) => {
           this._pokemon$.next(pokemon);
+
         },
         error: (error: HttpErrorResponse) => {
           // Handle error msg

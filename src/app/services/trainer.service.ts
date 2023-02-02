@@ -5,6 +5,7 @@ import { StorageUtil } from '../utils/storage.utils';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Pokemon } from '../models/pokemon.model';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
@@ -46,8 +47,8 @@ export class TrainerService {
     userId: number,
     body_: Trainer
   ): Observable<Trainer> {
-    let apiKey = 'abcdefg'; //TODO:FIX THIS
-    let apiTrainers = 'https://bling-bling.herokuapp.com/trainers'; //TODO:FIX THIS
+    let apiKey = environment.apiKey;
+    let apiTrainers = environment.apiTrainers
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -71,8 +72,8 @@ export class TrainerService {
   ): Observable<Trainer> {
     console.log('Trainer service called'); //remove this
 
-    let apiKey = 'abcdefg'; //TODO:FIX THIS
-    let apiTrainers = 'https://bling-bling.herokuapp.com/trainers'; //TODO:FIX THIS
+    let apiKey = environment.apiKey;
+    let apiTrainers = environment.apiTrainers
 
     const httpOptions = {
       headers: new HttpHeaders({

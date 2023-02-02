@@ -29,10 +29,11 @@ export class CatalogueListComponent implements OnInit {
       .filter((e) => String(e).trim())
       .pop();
 
-    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`
   }
 
   addToCollection(pokemon: Pokemon): void {
+    console.log(pokemon)
     let trainer: Trainer = StorageUtil.storageRead(StorageKeys.PokemonTrainer)!;
     console.log(trainer.pokemon);
 
