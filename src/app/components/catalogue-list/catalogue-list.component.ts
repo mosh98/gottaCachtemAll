@@ -13,6 +13,8 @@ import { StorageUtil } from 'src/app/utils/storage.utils';
   styleUrls: ['./catalogue-list.component.css'],
 })
 export class CatalogueListComponent implements OnInit {
+  showPopUpCard = false;
+
   constructor(
     private readonly pokemonService: PokemonService,
     private readonly trainerService: TrainerService
@@ -46,5 +48,21 @@ export class CatalogueListComponent implements OnInit {
 
   get pokemonList$(): Observable<Pokemon[]> {
     return this.pokemonService.pokemonList$;
+  }
+
+  showInfo(pokemon:Pokemon): any {
+    //get the id
+    const url = pokemon.url
+    const id = url
+      .trim()
+      .split('/')
+      .filter((e) => String(e).trim())
+      .pop(); //get id
+    //get pokimon stats
+    this.showPopUpCard = true;
+    //const item = PokemonService.getPokemonStats()
+
+
+
   }
 }
