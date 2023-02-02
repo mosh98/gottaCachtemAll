@@ -4,6 +4,8 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 import { Pokemon } from '../models/pokemon.model';
 import { PokemonListResponse } from '../models/pokemon-list-response.model';
 import { PokemonResponse } from '../models/pokemon-response.model';
+import { StorageUtil } from '../utils/storage.utils';
+import { StorageKeys } from '../enums/storage-keys.enum';
 
 const apiUrl: string = `https://pokeapi.co/api/v2/pokemon`;
 
@@ -28,6 +30,12 @@ export class PokemonService {
   }
 
   getPokemonList(): void {
+    if (StorageUtil.storageRead(StorageKeys.Pokemon)) {
+      return this._pokemonList$.next(
+        StorageUtil.storageRead(StorageKeys.Pokemon)!
+      );
+    }
+
     this.http
       .get<PokemonListResponse>(apiUrl)
       .pipe(
@@ -37,6 +45,7 @@ export class PokemonService {
       )
       .subscribe({
         next: (pokemonList: Pokemon[]) => {
+          StorageUtil.storageSave(StorageKeys.Pokemon, pokemonList);
           this._pokemonList$.next(pokemonList);
         },
         error: (error: HttpErrorResponse) => {
