@@ -38,9 +38,9 @@ export class CatalogueListComponent implements OnInit {
 
   addToCollection(pokemon: Pokemon): void {
 
-    if (this.hasCaught(pokemon)) return alert("Already Caught!")
+    if (this.hasCaught(pokemon))
+      return alert(`Already Caught ${pokemon.name}!`);
 
-      // Fix proper error
     console.log(pokemon);
     let trainer: Trainer = StorageUtil.storageRead(StorageKeys.PokemonTrainer)!;
     console.log(trainer.pokemon);
@@ -50,31 +50,28 @@ export class CatalogueListComponent implements OnInit {
       ...trainer,
       pokemon: tempList,
     });
-    alert("Pokemon Abducted!")
+    return alert(`Caught ${pokemon.name}!`);
   }
 
   get pokemonList$(): Observable<Pokemon[]> {
     return this.pokemonService.pokemonList$;
   }
 
-  showInfo(pokemon:Pokemon): any {
+  showInfo(pokemon: Pokemon): any {
     //get the id
-    const url = pokemon.url
+    const url = pokemon.url;
     const id = url
       .trim()
       .split('/')
       .filter((e) => String(e).trim())
       .pop(); //get id
 
-    let det = null
+    let det = null;
     this.pokemonService.getPokemonStats(id).subscribe((data: any) => {
       console.log(data);
-      det = data;
-      let msg = `HP : ${det.stats[0].base_stat} \n Attack : ${det.stats[1].base_stat} \n Defense : ${det.stats[2].base_stat} \n Speed : ${det.stats[5].base_stat} \n Special Attack : ${det.stats[3].base_stat} \n Special Defense : ${det.stats[4].base_stat} \n`
-      alert(msg)
 
-
+      let msg = `HP : ${data.stats[0].base_stat} \n Attack : ${data.stats[1].base_stat} \n Defense : ${data.stats[2].base_stat} \n Speed : ${data.stats[5].base_stat} \n Special Attack : ${data.stats[3].base_stat} \n Special Defense : ${data.stats[4].base_stat} \n`;
+      alert(msg);
     });
-
   }
 }
