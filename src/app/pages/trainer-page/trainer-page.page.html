@@ -1,3 +1,30 @@
+<div class="flex">
+  <a routerLink="/catalogue-page"
+    ><button
+      class="absolute top-2 left-5 bg-red-500 px-2 py-1 rounded text-white font-semibold"
+    >
+      Catalogue Page
+    </button></a
+  >
+
+  <h1 *ngIf="userData" class="font-bold text-3xl text-blue-600 mx-auto">
+    {{userData.username}}'s Trainer Page
+  </h1>
+</div>
+
+<ul *ngIf="userPokemon" class="mt-10">
+  <li *ngFor="let pokemon of userPokemon; let indexOfelement=index;">
+    {{ pokemon }}
+
+    <button
+      class="bg-black hover:bg-red-500 text-white font-bold py-2 px-4 rounded"
+      (click)="onSelect(pokemon, indexOfelement)"
+    >
+      Remove
+    </button>
+  </li>
+</ul>
+-->
 <img src="pokemon-logo-black-transparent.png" class="center">
 <h1 *ngIf="username" class="font-bold text-3xl text-blue-600 w-1/2 mx-auto"> {{username}}'s Trainer Page </h1>
 
