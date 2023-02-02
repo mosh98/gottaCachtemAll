@@ -30,11 +30,7 @@ export class TrainerService {
   }
 
   hasCaught(pokemon: Pokemon): boolean {
-    let ownedPokemon: Pokemon[] = this._trainer?.pokemon.map(
-      (item) => item as unknown as Pokemon
-    )!;
-    console.log(ownedPokemon);
-
+    let ownedPokemon: Pokemon[] = this._trainer?.pokemon!;
     if (!ownedPokemon) return false;
 
     for (let i = 0; i < ownedPokemon.length; i++) {
