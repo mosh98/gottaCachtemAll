@@ -8,7 +8,7 @@
 
 <app-trainer-hero></app-trainer-hero>
 
-<table *ngIf="userPokemon" class="w-1/2 mx-auto text-left table-auto">
+<table *ngIf="userPokemon " class="w-1/2 mx-auto text-left table-auto">
   <thead>
     <tr class="bg-gray-800 text-white">
       <th class="px-4 py-2">Pokemon Name</th>
@@ -22,12 +22,13 @@
       class="bg-gray-100"
     >
       <td class="border px-4 py-2 font-bold">{{ pokemon.name }}</td>
-      <td class="border px-4 py-2">
+      <td class="border px-4 py-2 flex">
         <img
           [src]="getPokemonImage(pokemon.url)"
           alt="pokemon"
           width="100"
           height="100"
+          class="mx-auto"
         />
       </td>
       <td class="border px-4 py-2">

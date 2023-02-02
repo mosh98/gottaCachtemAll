@@ -4,6 +4,10 @@ export class StorageUtil {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
+  static storageClear(): void {
+    localStorage.clear();
+  }
+
   // Fetches and parses json of trainer from local storage.
   static storageRead<T>(key: string): T | undefined {
     const storedValue = localStorage.getItem(key);

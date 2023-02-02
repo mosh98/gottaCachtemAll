@@ -6,6 +6,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Pokemon } from '../models/pokemon.model';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -23,7 +25,7 @@ export class TrainerService {
     this._trainer = trainer;
   }
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this._trainer = StorageUtil.storageRead<Trainer>(
       StorageKeys.PokemonTrainer
     );
@@ -39,6 +41,12 @@ export class TrainerService {
       }
     }
     return false;
+  }
+
+  logout() {
+    if (!confirm('Are you sure you want to logout?')) return;
+    StorageUtil.storageClear();
+    return this.router.navigateByUrl('/login-page');
   }
 
   public addPokemonToTrainer(
