@@ -8,7 +8,7 @@ import { StorageUtil } from '../utils/storage.utils';
 import { StorageKeys } from '../enums/storage-keys.enum';
 import { environment } from 'src/environments/environment';
 
-const apiUrl: string = environment.apiUrl
+const apiUrl: string = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root',
@@ -19,9 +19,6 @@ export class PokemonService {
     new BehaviorSubject<Pokemon[]>([]);
   private readonly _pokemon$: BehaviorSubject<Pokemon> =
     new BehaviorSubject<Pokemon>({} as Pokemon);
-  private _spriteUrlById(id: number): string {
-    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
-  }
 
   get pokemonList$(): Observable<Pokemon[]> {
     return this._pokemonList$.asObservable();
@@ -41,7 +38,6 @@ export class PokemonService {
       .get<PokemonListResponse>(apiUrl)
       .pipe(
         map((res: PokemonListResponse) => {
-
           return res.results;
         })
       )
@@ -56,20 +52,33 @@ export class PokemonService {
       });
   }
 
-  getPokemonStats(id: any): any {
+  getPokemonImage(url: string, hasAltUrl?: boolean) {
+    const id = url
+      .trim()
+      .split('/')
+      .filter((e) => String(e).trim())
+      .pop();
+    if (hasAltUrl) {
+      return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
+    }
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`;
+  }
+
+  getPokemonStats(name: string): Observable<Pokemon> {
     this.http
-      .get<any>(`${apiUrl}/${id}`)
+      .get<any>(`${apiUrl}/${name}`)
       .pipe(
-
         map((res: PokemonResponse) => {
-
-          return { name: res.name, url: `${apiUrl}/${res.id}`, stats:res.stats}
+          return {
+            name: res.name,
+            url: `${apiUrl}/${res.name}`,
+            stats: res.stats,
+          };
         })
       )
       .subscribe({
         next: (pokemon: Pokemon) => {
           this._pokemon$.next(pokemon);
-
         },
         error: (error: HttpErrorResponse) => {
           // Handle error msg

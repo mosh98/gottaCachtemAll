@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { StorageKeys } from 'src/app/enums/storage-keys.enum';
 import { Pokemon } from 'src/app/models/pokemon.model';
@@ -17,6 +17,11 @@ export class CatalogueListComponent implements OnInit {
     private readonly pokemonService: PokemonService,
     private readonly trainerService: TrainerService
   ) {}
+
+  @Output() pokemonEvent = new EventEmitter<Pokemon>();
+  sendPokemon(pokemon: Pokemon) {
+    this.pokemonEvent.emit(pokemon);
+  }
 
   ngOnInit(): void {
     this.pokemonService.getPokemonList();
@@ -37,41 +42,37 @@ export class CatalogueListComponent implements OnInit {
   }
 
   addToCollection(pokemon: Pokemon): void {
+    // if (this.hasCaught(pokemon))
+    //   return alert(`Already Caught ${pokemon.name}!`);
 
-    if (this.hasCaught(pokemon))
-      return alert(`Already Caught ${pokemon.name}!`);
-
-    console.log(pokemon);
     let trainer: Trainer = StorageUtil.storageRead(StorageKeys.PokemonTrainer)!;
-    console.log(trainer.pokemon);
 
     let tempList = [...trainer.pokemon, pokemon];
     this.trainerService.addPokemonToTrainer(trainer.id, {
       ...trainer,
       pokemon: tempList,
     });
-    return alert(`Caught ${pokemon.name}!`);
   }
 
   get pokemonList$(): Observable<Pokemon[]> {
     return this.pokemonService.pokemonList$;
   }
 
-  showInfo(pokemon: Pokemon): any {
-    //get the id
-    const url = pokemon.url;
-    const id = url
-      .trim()
-      .split('/')
-      .filter((e) => String(e).trim())
-      .pop(); //get id
+  // showInfo(pokemon: Pokemon): any {
+  //   //get the id
+  //   const url = pokemon.url;
+  //   const id = url
+  //     .trim()
+  //     .split('/')
+  //     .filter((e) => String(e).trim())
+  //     .pop(); //get id
 
-    let det = null;
-    this.pokemonService.getPokemonStats(id).subscribe((data: any) => {
-      console.log(data);
+  //   let det = null;
+  //   this.pokemonService.getPokemonStats(id).subscribe((data: any) => {
+  //     console.log(data);
 
-      let msg = `HP : ${data.stats[0].base_stat} \n Attack : ${data.stats[1].base_stat} \n Defense : ${data.stats[2].base_stat} \n Speed : ${data.stats[5].base_stat} \n Special Attack : ${data.stats[3].base_stat} \n Special Defense : ${data.stats[4].base_stat} \n`;
-      alert(msg);
-    });
-  }
+  //     let msg = `HP : ${data.stats[0].base_stat} \n Attack : ${data.stats[1].base_stat} \n Defense : ${data.stats[2].base_stat} \n Speed : ${data.stats[5].base_stat} \n Special Attack : ${data.stats[3].base_stat} \n Special Defense : ${data.stats[4].base_stat} \n`;
+  //     alert(msg);
+  //   });
+  // }
 }
