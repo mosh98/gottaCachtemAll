@@ -15,14 +15,13 @@
     >
       Catch
     </button>
-    <div class="flex">
-      <img
-        *ngIf="hasCaught(pokemon)"
-        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"
-        alt="Pokeball"
-        class="h-10 w-10 mx-auto my-2"
-      />
-    </div>
+
+    <img
+      *ngIf="hasCaught(pokemon)"
+      src="./assets/closed-pokeball.png"
+      alt="Pokeball"
+      class="h-10 w-10 mx-auto my-2 hover:hidden"
+    />
 
     <button
       (click)="sendPokemon(pokemon)"
