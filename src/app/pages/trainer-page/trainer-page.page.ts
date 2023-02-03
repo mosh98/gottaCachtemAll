@@ -4,6 +4,7 @@ import { TrainerService } from '../../services/trainer.service';
 import { StorageKeys } from '../../enums/storage-keys.enum';
 import { StorageUtil } from '../../utils/storage.utils';
 import { Trainer } from '../../models/trainer.model';
+import { PokemonService } from 'src/app/services/pokemon.service';
 
 @Component({
   selector: 'app-trainer-page',
@@ -20,7 +21,8 @@ export class TrainerPagePage implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private trainerService: TrainerService
+    private trainerService: TrainerService,
+    private readonly pokemonService: PokemonService
   ) {}
 
   /**
@@ -60,14 +62,7 @@ export class TrainerPagePage implements OnInit {
    */
 
   getPokemonImage(url: string) {
-    //you need be a crackhead to understand this
-    const id = url
-      .trim()
-      .split('/')
-      .filter((e) => String(e).trim())
-      .pop();
-
-    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`;
+    return this.pokemonService.getPokemonImage(url);
   }
 
   /**

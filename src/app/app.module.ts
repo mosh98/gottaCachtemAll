@@ -12,6 +12,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { CatalogueListComponent } from './components/catalogue-list/catalogue-list.component';
 import { CatalogueHeroComponent } from './components/catalogue-hero/catalogue-hero.component';
 import { TrainerHeroComponent } from './components/trainer-hero/trainer-hero.component';
+import { InfoModalComponent } from './components/info-modal/info-modal.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { TrainerHeroComponent } from './components/trainer-hero/trainer-hero.com
     CatalogueListComponent,
     CatalogueHeroComponent,
     TrainerHeroComponent,
+    InfoModalComponent,
   ],
 
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],

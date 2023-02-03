@@ -1,5 +1,13 @@
 <app-catalogue-hero></app-catalogue-hero>
 
 <div class="flex w-full">
-  <app-catalogue-list></app-catalogue-list>
+  <app-catalogue-list
+    (pokemonEvent)="receivePokemon($event)"
+  ></app-catalogue-list>
+  <app-info-modal
+    *ngIf="showModal && displayedPokemon"
+    [pokemon]="displayedPokemon"
+    [showModal]="showModal"
+    (modalEvent)="receiveModalIsHidden($event)"
+  ></app-info-modal>
 </div>
