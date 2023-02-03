@@ -18,6 +18,16 @@ export class AuthGuard implements CanActivate {
     private readonly trainerService: TrainerService
   ) {}
 
+  /**
+   * Check if trainer is present in sessionStorage
+   * If not, redirect to login-page
+   * @param route
+   * @param state
+   * @returns boolean
+   * @returns UrlTree
+   * @returns Observable<boolean | UrlTree>
+   *       | Promise<boolean | UrlTree>
+   */
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
