@@ -14,6 +14,14 @@ export class LoginService {
   constructor(private readonly http: HttpClient) {}
 
   // Checks if user exists, if not: create user.
+  /**
+   * Login user
+   * @param username Username
+   * @returns Observable<Trainer>
+   *   If user exists: returns user
+   *   If user does not exist: creates user and returns user
+   *   If error: returns error
+   * */
   login(username: string): Observable<Trainer> {
     return this.checkUser(username).pipe(
       switchMap((trainer: Trainer | undefined) => {
@@ -25,14 +33,29 @@ export class LoginService {
     );
   }
 
-  // Checks if user exists
+  //
+  /**
+   * Checks if user exists
+   * @param username Username
+   * @returns Observable<Trainer | undefined>
+   *   If user exists: returns user
+   *   If user does not exist: returns undefined
+   * */
   private checkUser(username: string): Observable<Trainer | undefined> {
     return this.http
       .get<Trainer[]>(`${apiTrainers}?username=${username}`)
       .pipe(map((res: Trainer[]) => res.pop()));
   }
 
-  // Creates new user
+  /**
+   * Creates new user
+   * @param username Username
+   * @returns Observable<Trainer>
+   *   If user is created: returns user
+   *   If error: returns error
+   *
+   */
+
   private createUser(username: string): Observable<Trainer> {
     const user = {
       username,
