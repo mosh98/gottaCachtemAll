@@ -23,6 +23,10 @@ export class TrainerPagePage implements OnInit {
     private trainerService: TrainerService
   ) {}
 
+  /**
+   * Init function for the trainer page that bring in the data from the api (or pokimons)
+   *
+   */
   ngOnInit() {
     const userData: Trainer = StorageUtil.storageRead(
       StorageKeys.PokemonTrainer
@@ -50,6 +54,11 @@ export class TrainerPagePage implements OnInit {
       });
   }
 
+  /**
+   * Get the image of the pokemon
+   * @param url
+   */
+
   getPokemonImage(url: string) {
     //you need be a crackhead to understand this
     const id = url
@@ -61,11 +70,15 @@ export class TrainerPagePage implements OnInit {
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`;
   }
 
+  /**
+   * On select function that removes the pokemon from the list
+   * and also removes it from the api
+   * @param item pokimon item or object
+   * @param index the index of the item in the list, helps with removing the item from the list
+   * @returns void
+   */
   onSelect(item: any, index: number) {
-    /**
-     * 1. selectedItem är indexet till pokimon i listan av trainer
-     * 2.
-     * **/
+
 
     //make the patch item in ye
 

@@ -23,13 +23,32 @@ export class PokemonService {
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
   }
 
+  /**
+   * Pokemon list observable
+   * @returns Observable<Pokemon[]>
+   *   If pokemon list is available: returns pokemon list
+   *   If pokemon list is not available: returns empty array
+   */
   get pokemonList$(): Observable<Pokemon[]> {
     return this._pokemonList$.asObservable();
   }
+
+  /**
+   * Pokemon observable
+   * @returns Observable<Pokemon>
+   */
   get pokemon$(): Observable<Pokemon> {
     return this._pokemon$.asObservable();
   }
 
+  /**
+   * Get pokemon list
+   * @returns void
+   *  If pokemon list is available: returns pokemon list
+   *  If pokemon list is not available: returns empty array
+   *  If error: returns error
+   *
+   */
   getPokemonList(): void {
     if (StorageUtil.storageRead(StorageKeys.Pokemon)) {
       return this._pokemonList$.next(
@@ -56,6 +75,14 @@ export class PokemonService {
       });
   }
 
+  /**
+   * Get pokemon stats
+   * @param id
+   * @returns Observable<Pokemon>
+   *   If pokemon stats are available: returns pokemon stats
+   *   If pokemon stats are not available: returns empty object
+   *   If error: returns error
+   */
   getPokemonStats(id: any): any {
     this.http
       .get<any>(`${apiUrl}/${id}`)
