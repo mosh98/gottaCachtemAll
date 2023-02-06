@@ -66,11 +66,10 @@ export class PokemonService {
           this._pokemonList$.next(pokemonList);
         },
         error: (error: HttpErrorResponse) => {
-          // Handle error msg
+          Error(error.message);
         },
       });
   }
-
 
   getPokemonImage(url: string, hasAltUrl?: boolean) {
     const id = url
@@ -84,7 +83,6 @@ export class PokemonService {
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`;
   }
 
-
   /**
    * Get pokemon stats
    * @param id
@@ -94,7 +92,6 @@ export class PokemonService {
    *   If error: returns error
    */
   getPokemonStats(name: string): Observable<Pokemon> {
-
     this.http
       .get<any>(`${apiUrl}/${name}`)
       .pipe(
@@ -111,7 +108,7 @@ export class PokemonService {
           this._pokemon$.next(pokemon);
         },
         error: (error: HttpErrorResponse) => {
-          // Handle error msg
+          Error(error.message);
         },
       });
     return this._pokemon$.asObservable();

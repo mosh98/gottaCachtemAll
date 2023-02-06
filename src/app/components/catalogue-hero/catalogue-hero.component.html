@@ -1,16 +1,23 @@
-
 <div class="flex h-64 bg-blue-400 relative">
   <img
     src="./assets/pokemon-logo-black-transparent.png"
-    class="absolute top-0 left-0 h-64"
+    class="absolute top-0 left-[10%] h-64"
     alt="your-image-alt-text"
   />
 
   <h1 class="text-5xl m-auto font-semibold text-white">Catalogue Page</h1>
+  <div class="absolute right-80 top-16">
+    <h2 class="text-white text-xl font-semibold">{{ trainerUsername() }}</h2>
+    <img
+      src="./assets/poke-ball.png"
+      alt="user pokeball"
+      class="absolute bottom-0 left-[100%] top-0.5"
+    />
+  </div>
   <img
     src="https://archives.bulbagarden.net/media/upload/5/52/HGSS_Ethan_Back.png"
     alt="Trainer"
-    class="absolute left-[25%] bottom-0 h-60"
+    class="absolute w-40 bottom-0 right-72 -scale-x-100"
   />
   <a routerLink="/trainer-page">
     <button
@@ -25,7 +32,4 @@
       Logout
     </button>
   </a>
-
 </div>
-
-
