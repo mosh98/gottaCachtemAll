@@ -1,27 +1,33 @@
-# Untitled1
+# Pokemon Trainer
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.3.
+**What is Pokemon Trainer?**
+* A website where the user can browse pokemons, the pokemons' skills, and collect them. 
 
-## Development server
+**What technologies were used?**
+* The project was created using TypeScript, Angular, HTML, and TailwindCSS. Tailwind was deemed especially appropriate for this project as Angular separates each component into three separate files: TypeScript, HTML, and CSS. The use of TailwindCSS allows us to write inline CSS, which means we could remove a majority of the individual component CSS files altogether. 
+	
+**What challenges were faced?**
+* The biggest challenge faced was using Angular. Neither of us were familiar with Angular previously to working with it in this project. However, over the duration of the project we got more and more used to the flow of working with Angular. 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+**Feature breakdown** 
+* Login Page
+Simple page where the user can login or register by entering their username
+	- Login: Logs in or registers the username input based on whether the username exists in the API already or not. Upon login the user object is fetched from the API, assuming the user already existed, and the user data is saved in localStorage. 
+  ![image](https://user-images.githubusercontent.com/82815800/216978664-2a2fe48e-2c1a-49c7-8cc8-d58fd69d1087.png)
+  
+* Catalogue page
+Page which displays some pokemons and allows the user to catch them, as well as showing more info regarding their abilities.  
+	- Catch: Allows for the user to catch a pokemon. Button is replaced with a pokeball if the pokemon is captured. 
+  ![image](https://user-images.githubusercontent.com/82815800/216979371-e6ee8bd2-c7cf-4e2e-af9c-59427b3c0db5.png)
 
-## Code scaffolding
+  - Show info: Shows info regarding any given pokemon by fetching the info from the PokeAPI. 
+		![image](https://user-images.githubusercontent.com/82815800/216979612-000a3db1-23d5-421c-861c-46615ec177cb.png)
+    
+  - Trainer page: Takes the user to the trainer page. 
+  - Logout: Deletes the user data from the localStorage and sends the user to the login page. 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+* Trainer page
+Shows the pokemons that the user has captured and allows the user to release them. 
+  - Remove: Removes the pokemon in question from the localStorage, and the user's object in the API. 
+  ![image](https://user-images.githubusercontent.com/82815800/216980509-ef019e79-9f6c-4701-a773-277a7b29d9df.png)
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
