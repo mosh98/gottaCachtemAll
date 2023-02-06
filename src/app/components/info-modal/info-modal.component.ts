@@ -24,7 +24,6 @@ export class InfoModalComponent implements OnInit {
       )
       .subscribe((stats) => {
         this.statTest = stats;
-        console.log(this.statTest);
         return stats;
       });
   }
