@@ -4,7 +4,7 @@ import { Pokemon } from 'src/app/models/pokemon.model';
 @Component({
   selector: 'app-catalogue-page',
   templateUrl: './catalogue-page.page.html',
-  styleUrls: ['./catalogue-page.page.css'],
+  styleUrls: [],
 })
 export class CataloguePagePage {
   displayedPokemon: Pokemon | undefined;

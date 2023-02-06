@@ -4,7 +4,7 @@ import { TrainerService } from 'src/app/services/trainer.service';
 @Component({
   selector: 'app-trainer-hero',
   templateUrl: './trainer-hero.component.html',
-  styleUrls: ['./trainer-hero.component.css'],
+  styleUrls: [],
 })
 export class TrainerHeroComponent {
   constructor(private readonly trainerService: TrainerService) {}

@@ -1,34 +1,33 @@
-<!--<div class="absolute w-full h-full left-0" (click)="sendModalIsHidden()">-->
-
-<div class="absolute w-full h-full left-0 opacity-60 "  (click)="sendModalIsHidden()">
-</div>
+<div class="absolute w-full h-full left-0" (click)="sendModalIsHidden()"></div>
+<div
+  class="absolute left-[35%] w-[30%] bg-slate-500 opacity-95 text-center rounded-md shadow-md"
+>
   <div
-    class="absolute left-[35%] w-[30%] bg-slate-500 text-center rounded-md shadow-md"
+    class="absolute top-3 right-5 text-white font-bold hover:cursor-pointer"
+    (click)="sendModalIsHidden()"
   >
-    <div class="absolute top-3 right-5 text-white font-bold hover:cursor-pointer"
-      (click)="sendModalIsHidden()">X</div>
-
-    <div class="relative mt-10 flex flex-col">
-      <img
-        [src]="getPokemonImage(pokemon.url, true)"
-        alt="{{ pokemon.name }}"
-        class="mx-auto w-40 max-h-64"/>
-      <h1 class="text-3xl text-white font-semibold mt-3">{{ pokemon.name }}</h1>
-
-      <div
-        *ngIf="statTest !== undefined"
-        class="flex flex-wrap mx-auto w-full mt-3">
-        <div
-          *ngFor="let stat of statTest"
-          class="my-3 w-[50%] mx-auto text-center text-slate-200">
-          <p class="font-semibold text-2xl">{{ stat.base_stat }}</p>
-          <p class="text-lg">{{ stat.stat.name.toUpperCase() }}</p>
-        </div>
-      </div>
-
-    </div>
-
-
+    X
   </div>
 
+  <div class="relative mt-10 flex flex-col">
+    <img
+      [src]="getPokemonImage(pokemon.url, true)"
+      alt="{{ pokemon.name }}"
+      class="mx-auto w-40 max-h-64"
+    />
+    <h1 class="text-3xl text-white font-semibold mt-3">{{ pokemon.name }}</h1>
 
+    <div
+      *ngIf="statTest !== undefined"
+      class="flex flex-wrap mx-auto w-full mt-3"
+    >
+      <div
+        *ngFor="let stat of statTest"
+        class="my-3 w-[50%] mx-auto text-center text-slate-200"
+      >
+        <p class="font-semibold text-2xl">{{ stat.base_stat }}</p>
+        <p class="text-lg">{{ stat.stat.name.toUpperCase() }}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -9,7 +9,7 @@ import { PokemonService } from 'src/app/services/pokemon.service';
 @Component({
   selector: 'app-trainer-page',
   templateUrl: './trainer-page.page.html',
-  styleUrls: ['./trainer-page.page.css'],
+  styleUrls: [],
 })
 export class TrainerPagePage implements OnInit {
   userData: any; //entire data from the api
@@ -73,8 +73,6 @@ export class TrainerPagePage implements OnInit {
    * @returns void
    */
   onSelect(item: any, index: number) {
-
-
     //make the patch item in ye
 
     //get the userData based upon item
