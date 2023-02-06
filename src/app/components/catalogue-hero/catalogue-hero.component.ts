@@ -9,6 +9,11 @@ import { TrainerService } from 'src/app/services/trainer.service';
 export class CatalogueHeroComponent {
   constructor(private readonly trainerService: TrainerService) {}
 
+  /**
+   * Logs out the current trainer.
+   * @returns void
+   * @memberof CatalogueHeroComponent
+   */
   logout(): void {
     this.trainerService.logout();
   }

@@ -18,15 +18,43 @@ export class CatalogueListComponent implements OnInit {
     private readonly trainerService: TrainerService
   ) {}
 
+  /**
+   * Emits the selected pokemon to the parent component.
+   * @type {EventEmitter<Pokemon>}
+   * @memberof CatalogueListComponent
+   * @see https://angular.io/guide/component-interaction#parent-listens-for-child-event
+   * @see https://angular.io/guide/component-interaction#parent-calls-an-viewchild
+   * @see https://angular.io/guide/component-interaction#parent-calls-an-viewchildren
+   */
   @Output() pokemonEvent = new EventEmitter<Pokemon>();
+
+  /**
+   * Sends the selected pokemon to the parent component.
+   * @param pokemon
+   * @returns void
+   * @memberof CatalogueListComponent
+   */
   sendPokemon(pokemon: Pokemon) {
     this.pokemonEvent.emit(pokemon);
   }
 
+  /**
+   * Gets the pokemon list from the pokemon service.
+   * @returns void
+   * @memberof CatalogueListComponent
+   *
+   */
   ngOnInit(): void {
     this.pokemonService.getPokemonList();
   }
 
+  /**
+   * Generates the pokemon image url.
+   * @param url
+   * @returns string
+   * @memberof CatalogueListComponent
+   *
+   */
   generatePokemonImg(url: string): string {
     const id = url
       .trim()
@@ -37,10 +65,29 @@ export class CatalogueListComponent implements OnInit {
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`;
   }
 
+  /**
+   * Checks if the pokemon is already caught.
+   * @param pokemon
+   * @returns boolean
+   * @memberof CatalogueListComponent
+   */
+
+  /**
+   * Checks if the pokemon is already caught.
+   * @param pokemon
+   * @returns boolean
+   * @memberof CatalogueListComponent
+   */
   hasCaught(pokemon: Pokemon): boolean {
     return this.trainerService.hasCaught(pokemon);
   }
 
+  /**
+   * Adds the pokemon to the trainer's collection.
+   * @param pokemon
+   * @returns void
+   * @memberof CatalogueListComponent
+   */
   addToCollection(pokemon: Pokemon): void {
     let trainer: Trainer = StorageUtil.storageRead(StorageKeys.PokemonTrainer)!;
 
@@ -51,6 +98,11 @@ export class CatalogueListComponent implements OnInit {
     });
   }
 
+  /**
+   * Gets the pokemon list from the pokemon service.
+   * @returns Observable<Pokemon[]>
+   *  @memberof CatalogueListComponent
+   */
   get pokemonList$(): Observable<Pokemon[]> {
     return this.pokemonService.pokemonList$;
   }
