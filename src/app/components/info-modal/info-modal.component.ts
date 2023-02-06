@@ -6,7 +6,7 @@ import { PokemonService } from 'src/app/services/pokemon.service';
 @Component({
   selector: 'app-info-modal',
   templateUrl: './info-modal.component.html',
-  styleUrls: ['./info-modal.component.css'],
+  styleUrls: [],
 })
 export class InfoModalComponent implements OnInit {
   constructor(private readonly pokemonService: PokemonService) {}
